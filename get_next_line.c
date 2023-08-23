@@ -6,7 +6,7 @@
 /*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:14:32 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/23 13:57:46 by ereinald         ###   ########.fr       */
+/*   Updated: 2023/08/23 21:30:24 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_read(int fd, char *pending)
 	char	*buffer;
 	int		bytes_read;
 
-	buffer = malloc((BUFFER_SIZE +1) * sizeof(char));
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
@@ -33,7 +33,7 @@ char	*ft_read(int fd, char *pending)
 		pending = ft_strjoin(pending, buffer);
 	}
 	free(buffer);
-	return(pending);
+	return (pending);
 }
 
 char	*get_next_line(int fd)

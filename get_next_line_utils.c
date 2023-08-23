@@ -6,7 +6,7 @@
 /*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:14:00 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/23 20:29:49 by ereinald         ###   ########.fr       */
+/*   Updated: 2023/08/23 21:33:39 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	int	i;
 
@@ -80,9 +80,10 @@ char	*ft_get_line(char *pending)
 		return (NULL);
 	while (pending[i] && pending[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
+	i = 0;
 	while (pending[i] && pending[i] != '\n')
 	{
 		str[i] = pending[i];
@@ -104,7 +105,6 @@ char	*ft_pending_trimmed(char *pending)
 	char	*str;
 
 	i = 0;
-	j = 0;
 	while (pending[i] && pending[i] != '\n')
 		i++;
 	if (!pending[i])
@@ -116,6 +116,7 @@ char	*ft_pending_trimmed(char *pending)
 	if (!str)
 		return (NULL);
 	i++;
+	j = 0;
 	while (pending[i])
 		str[j++] = pending[i++];
 	str[j] = '\0';
