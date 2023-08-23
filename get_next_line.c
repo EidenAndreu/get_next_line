@@ -6,7 +6,7 @@
 /*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:14:32 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/23 21:30:24 by ereinald         ###   ########.fr       */
+/*   Updated: 2023/08/23 22:48:33 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,17 @@ char	*get_next_line(int fd)
 		pending = (ft_pending_trimmed(pending));
 		return (line);
 }
-/*
+
 int	main(void)
 {
 	int		fd;
 	char	buffer[42];
 	int		chars_read;
 
-	fd = open("", O_RDONLY);
-	while ((chars_read = read(fd, buffer, 42)))
+	fd = open("test.txt", O_RDONLY);
+	while ((chars_read = read(fd, buffer, 99)))
 	{
 		buffer[chars_read] = '\0';
-		printf("buffer %s\n", buffer);
+		printf("%s\n", buffer);
 	}
 }
-*/

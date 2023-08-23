@@ -6,7 +6,7 @@
 /*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:13:49 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/23 21:31:43 by ereinald         ###   ########.fr       */
+/*   Updated: 2023/08/23 22:43:31 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 
 # ifndef BUFFER_SIZE
 #define BUFFER_SIZE 42
