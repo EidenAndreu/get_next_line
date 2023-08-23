@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/22 13:14:00 by ereinald          #+#    #+#             */
+/*   Updated: 2023/08/23 13:11:07 by ereinald         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
@@ -21,9 +33,9 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
-	int	len1;
-	int	len2;
+	int		i;
+	int		len1;
+	int		len2;
 	char	*str;
 
 	if (s1 && s2)
@@ -50,7 +62,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_get_line(char *pending)
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	i = 0;
@@ -58,7 +70,7 @@ char	*ft_get_line(char *pending)
 		return (NULL);
 	while (pending[i] && pending[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
 	while (pending[i] && pending[i] != '\n')
@@ -77,8 +89,8 @@ char	*ft_get_line(char *pending)
 
 char	*ft_pending_trimmed(char *pending)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*str;
 
 	i = 0;
