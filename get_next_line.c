@@ -6,50 +6,99 @@
 /*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:14:32 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/24 11:33:15 by ereinald         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:47:40 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*ft_free(char **str)
+{
+	free(*str);
+	*str = NULL;
+	return (NULL);
+}
+
+char	*ft_clean(char *pending)
+{
+	char	*saved;
+	char	*str;
+	int		len;
+
+	str = ft_strchr(pending, '\n');
+	if (!str)
+	{
+		saved = NULL;
+		return (ft_free(&pending));
+	}
+	else
+		len = (str - pending) + 1;
+	if (!pending[len])
+		return (ft_free(&pending));
+	saved = ft_substr(pending, len, ft_strlen(pending) - len);
+	ft_free(&pending);
+	if (!saved)
+		return (NULL);
+	return (saved);
+}
+
+char	*ft_get_line(char *pending)
+{
+	char	*line;
+	char	*str;
+	int		len;
+
+	str = ft_strchr(pending, '\n');
+	len = (str - pending) + 1;
+	line = ft_substr(pending, 0, len);
+	if (!line)
+		return (NULL);
+	return (line);
+}
+
 char	*ft_read(int fd, char *pending)
 {
-	char	*buffer;
 	int		bytes_read;
+	char	*buffer;
 
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchr(pending, '\n') && bytes_read != 0)
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (ft_free(&pending));
+	buffer[0] = '\0';
+	while (bytes_read > 0 && !ft_strchr(buffer, '\n'))
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read == -1)
+		bytes_read = read (fd, buffer, BUFFER_SIZE);
+		if (bytes_read > 0)
 		{
-			free(buffer);
-			return (NULL);
+			buffer[bytes_read] = '\0';
+			pending = ft_strjoin(pending, buffer);
 		}
-		buffer[bytes_read] = '\0';
-		pending = ft_strjoin(pending, buffer);
 	}
 	free(buffer);
+	if (bytes_read == -1)
+		return (ft_free(&pending));
 	return (pending);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
 	static char	*pending;
+	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	pending = ft_read(fd, pending);
+	if (fd < 0)
+		return (NULL);
+	if ((pending && !ft_strchr(pending, '\n')) || !pending)
+		pending = ft_read (fd, pending);
 	if (!pending)
 		return (NULL);
 	line = ft_get_line(pending);
-	pending = (ft_pending_trimmed(pending));
+	if (!line)
+		return (ft_free(&pending));
+	pending = ft_clean(pending);
 	return (line);
 }
+
 /*
  int main()
 {

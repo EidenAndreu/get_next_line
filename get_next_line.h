@@ -6,7 +6,7 @@
 /*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 13:13:49 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/24 11:42:11 by ereinald         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:50:17 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-size_t	ft_strlen(const char *s);
+size_t	ft_strlen(char *s);
 char	*ft_strchr(char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_get_line(char *pending);
-char	*ft_pending_trimmed(char *pending);
 char	*get_next_line(int fd);
+char	*ft_free(char **str);
+char	*ft_clean(char *pending);
+char	*ft_read(int fd, char *pending);
 
 #endif
