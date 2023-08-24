@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ereinald <ereinald@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ereinald <ereinald@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/22 13:14:32 by ereinald          #+#    #+#             */
-/*   Updated: 2023/08/24 11:33:15 by ereinald         ###   ########.fr       */
+/*   Created: 2023/08/24 11:43:10 by ereinald          #+#    #+#             */
+/*   Updated: 2023/08/24 11:43:17 by ereinald         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read(int fd, char *pending)
 {
@@ -39,15 +39,15 @@ char	*ft_read(int fd, char *pending)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*pending;
+	static char	*pending[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	pending = ft_read(fd, pending);
-	if (!pending)
+	pending[fd] = ft_read(fd, pending[fd]);
+	if (!pending[fd])
 		return (NULL);
-	line = ft_get_line(pending);
-	pending = (ft_pending_trimmed(pending));
+	line = ft_get_line(pending[fd]);
+	pending[fd] = (ft_pending_trimmed(pending[fd]));
 	return (line);
 }
 /*
